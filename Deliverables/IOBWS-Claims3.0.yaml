@@ -1512,6 +1512,13 @@ components:
       items:
         $ref: "#/components/schemas/mergeClaimBatchDetails"
 
+    alterClaimDetailsList:
+      description: |
+        List of claims to be altered
+      type: array
+      items:
+        $ref: "#/components/schemas/mergeClaimBatchDetails"
+
     mergeClaimDetails:
       description: |
         Merge patch claim object
@@ -1694,6 +1701,11 @@ components:
       properties:
         mergeList:
           $ref: "#/components/schemas/mergeClaimDetailsList"
+    
+    batchAlterInitiation:
+      properties:
+        alterList:
+          $ref: "#/components/schemas/alterClaimDetailsList"
 
     # RESPONSES
 
@@ -2520,6 +2532,7 @@ components:
             oneOf: 
               - $ref: "#/components/schemas/batchCreateInitiation"
               - $ref: "#/components/schemas/batchMergeInitiation"
+              - $ref: "#/components/schemas/batchAlterInitiation"
 
     templateCode:
       description: |
