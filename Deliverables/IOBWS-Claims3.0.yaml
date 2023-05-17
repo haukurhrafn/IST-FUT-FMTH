@@ -1514,10 +1514,33 @@ components:
 
     alterClaimDetailsList:
       description: |
-        List of claims to be altered
+        List of claims to be altered.
       type: array
       items:
         $ref: "#/components/schemas/mergeClaimBatchDetails"
+    
+    cancelClaimDetailsList:
+      description: |
+        List of claims to be cancelled.
+      type: array
+      items:
+        $ref: "#/components/schemas/claimList"
+    
+    markForSecondaryCollectionClaimDetailsList:
+      description: |
+        List of claims to be marked for secondary collection.
+      type: array
+      items:
+        $ref: "#/components/schemas/claimList"
+    
+    claimList:
+      description: |
+        List of claims
+      required:
+        - claimKey
+      properties: 
+        claimKey:
+          $ref: "#/components/schemas/claimKey"
 
     mergeClaimDetails:
       description: |
@@ -1697,15 +1720,25 @@ components:
         createList:
           $ref: "#/components/schemas/createClaimDetailList"
     
-    batchMergeInitiation:
-      properties:
-        mergeList:
-          $ref: "#/components/schemas/mergeClaimDetailsList"
-    
     batchAlterInitiation:
       properties:
         alterList:
           $ref: "#/components/schemas/alterClaimDetailsList"
+    
+    batchAlterReplaceInitiation:
+      properties:
+        alterReplaceList:
+          $ref: "#/components/schemas/alterClaimDetailsList"
+    
+    batchCancelInitiation:
+      properties:
+        cancelList:
+          $ref: "#/components/schemas/cancelClaimDetailsList"
+    
+    batchMarkForSecondaryCollectionInitiation:
+      properties:
+        markForSecondaryCollectionList:
+          $ref: "#/components/schemas/markForSecondaryCollectionClaimDetailsList"
 
     # RESPONSES
 
@@ -2531,8 +2564,10 @@ components:
           schema:
             oneOf: 
               - $ref: "#/components/schemas/batchCreateInitiation"
-              - $ref: "#/components/schemas/batchMergeInitiation"
               - $ref: "#/components/schemas/batchAlterInitiation"
+              - $ref: "#/components/schemas/batchAlterReplaceInitiation"
+              - $ref: "#/components/schemas/batchCancelInitiation"
+              - $ref: "#/components/schemas/batchMarkForSecondaryCollectionInitiation"
 
     templateCode:
       description: |
